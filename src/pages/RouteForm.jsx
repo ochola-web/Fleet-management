@@ -1,7 +1,7 @@
 // src/pages/RouteForm.jsx
 import React, { useState, useContext } from "react";
 import { RouteContext } from "../context/RouteContext";
-import "./Form.css";
+import "../styles.css";
 
 const RouteForm = () => {
   const { addRoute } = useContext(RouteContext);

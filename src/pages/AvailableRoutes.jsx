@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/routedashboard.css"; // reuse same CSS
+import "../styles.css"; // reuse same CSS
 
 const AvailableRoutes = () => {
   const [routes, setRoutes] = useState([]);

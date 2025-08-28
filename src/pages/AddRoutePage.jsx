@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouteContext } from "../context/RouteContext.jsx"; // ✅ FIXED import
+import "../styles.css";
 
 const AddRoutePage = () => {
   const { addRoute } = useRouteContext(); // ✅ useRouteContext instead of useRoutes

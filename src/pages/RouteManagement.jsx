@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouteContext } from "../context/RouteContext";
+import "../styles.css";
 
 const RouteManagement = () => {
   const { routes, addRoute, updateRoute, deleteRoute } = useRouteContext();

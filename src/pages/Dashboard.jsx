@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouteContext } from "../context/RouteContext";
+import "../styles.css";
 
 const Dashboard = () => {
   const { routes } = useRouteContext();

@@ -1,278 +1,215 @@
-/* ==========================
-   Global Theme & Typography
-   ========================== */
-:root {
-  --primary-color: #0066cc;
-  --primary-dark: #004c99;
-  --secondary-color: #f8f9fa;
-  --accent-color: #ff9800;
-  --success-color: #28a745;
-  --danger-color: #dc3545;
-  --text-color: #333;
-  --muted-color: #6c757d;
-  --bg-color: #f5f6fa;
-  --card-bg: #fff;
-  --border-radius: 10px;
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  --font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-* {
+/* =====================
+   Global Styles
+===================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* ==========================
-   Layout & Containers
-   ========================== */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -10px;
-}
-
-.col {
-  flex: 1;
-  padding: 10px;
-}
-
-/* ==========================
-   Navbar
-   ========================== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--primary-color);
-  padding: 15px 30px;
-  color: #fff;
-  box-shadow: var(--shadow);
-  font-weight: bold;
-  
-}
-
-.navbar a {
-  color: #fff;
-  margin: 0 15px;
+/* Links */
+a {
   text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: #0d6efd;
+}
+
+/* =====================
+   Navbar
+===================== */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #ddd !important;
+  margin-left: 0.5rem;
+}
+
+.navbar-nav .nav-link.active {
+  color: #0d6efd !important;
+}
+
+.navbar-nav .btn {
+  color: #fff;
+  border-color: #dc3545;
+}
+
+.navbar-nav .btn:hover {
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #dc3545;
+}
+
+/* =====================
+   Buttons
+===================== */
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 5px;
   transition: 0.3s;
 }
 
-.navbar a:hover {
-  color: var(--accent-color);
+.btn-primary:hover {
+  background-color: #0b5ed7;
 }
 
-/* ==========================
-   Cards & Tables
-   ========================== */
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* =====================
+   Forms
+===================== */
+input, textarea, select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* =====================
+   Cards
+===================== */
 .card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+/* Route Cards */
+.route-card {
   transition: transform 0.2s;
 }
-
-.card:hover {
+.route-card:hover {
   transform: translateY(-5px);
 }
 
-.routes-table {
+/* =====================
+   Tables
+===================== */
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 1rem;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.routes-table th,
-.routes-table td {
-  padding: 12px;
-  border: 1px solid #ddd;
+th, td {
+  padding: 0.75rem 1rem;
   text-align: left;
 }
 
-.routes-table th {
-  background: var(--primary-color);
+th {
+  background-color: #0d6efd;
   color: #fff;
-}
-
-.routes-table tr:hover {
-  background: #f1f1f1;
-}
-
-/* ==========================
-   Buttons
-   ========================== */
-button,
-.btn {
-  background: var(--primary-color);
-  border: none;
-  padding: 10px 20px;
-  color: #fff;
-  font-size: 14px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover,
-.btn:hover {
-  background: var(--primary-dark);
-}
-
-.btn-success {
-  background: var(--success-color);
-}
-
-.btn-danger {
-  background: var(--danger-color);
-}
-
-.btn-warning {
-  background: var(--accent-color);
-}
-
-/* ==========================
-   Forms
-   ========================== */
-form {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-}
-
-form label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 5px;
-  color: var(--text-color);
 }
 
-form input,
-form select,
-form textarea {
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #e9ecef;
+}
+
+.btn-edit, .btn-delete {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.25rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: #0d6efd;
+  color: #fff;
+}
+.btn-edit:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+.btn-delete:hover {
+  background-color: #b02a37;
+}
+
+/* =====================
+   Login & Forms Pages
+===================== */
+.login-card {
+  max-width: 400px;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
-  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background-color: #fff;
 }
 
-form input:focus,
-form select:focus,
-form textarea:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 4px var(--primary-color);
+.login-page {
+  background-color: #f4f6f9;
 }
 
-.error-message {
-  color: var(--danger-color);
-  font-size: 13px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
-.success-message {
-  color: var(--success-color);
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-/* ==========================
-   Interactivity
-   ========================== */
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-a.btn {
-  display: inline-block;
-  text-align: center;
-}
-
-/* Feedback messages */
 .alert {
-  padding: 12px;
-  border-radius: var(--border-radius);
-  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
 }
 
-.alert-success {
-  background: #d4edda;
-  color: var(--success-color);
-}
-
-.alert-danger {
-  background: #f8d7da;
-  color: var(--danger-color);
-}
-
-/* ==========================
-   Icons
-   ========================== */
-.icon {
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-/* ==========================
-   Responsiveness
-   ========================== */
-@media (max-width: 992px) {
-  .navbar {
-    flex-direction: column;
-  }
-
-  .row {
-    flex-direction: column;
-  }
-}
-
+/* =====================
+   Responsive
+===================== */
 @media (max-width: 768px) {
-  .routes-table,
-  .routes-table thead,
-  .routes-table tbody,
-  .routes-table th,
-  .routes-table td,
-  .routes-table tr {
-    display: block;
+  .navbar-nav {
+    text-align: center;
+  }
+
+  table, .route-card, .login-card {
     width: 100%;
   }
 
-  .routes-table tr {
-    margin-bottom: 15px;
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
+}
 
-  .routes-table td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
-  }
-
-  .routes-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 15px;
-    font-weight: bold;
-    color: var(--muted-color);
+@media (max-width: 576px) {
+  .navbar-nav .nav-link {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
   }
 }
