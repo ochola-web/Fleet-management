@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import RouteManagement from "./pages/RouteManagement.jsx";
-import AddRoutePage from "./pages/AddRoutePage.jsx"; // make sure this exists
+import AddRoutePage from "./pages/AddRoutePage.jsx";
 
 import { AuthProvider, AuthContext } from "./context/AuthContext.jsx";
 import { RouteProvider } from "./context/RouteContext.jsx";
@@ -20,11 +20,14 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" replace />;
 };
 
-const App = () => {
+// Layout wrapper that conditionally shows Navbar
+const AppLayout = () => {
+  const { user } = useContext(AuthContext);
+
   return (
-    <AuthProvider>
-      <RouteProvider>
-        <Navbar />
+    <>
+      {user && <Navbar />}
+      <ErrorBoundary>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
@@ -36,9 +39,7 @@ const App = () => {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <ErrorBoundary>
-                  <Dashboard />
-                </ErrorBoundary>
+                <Dashboard />
               </ProtectedRoute>
             }
           />
@@ -62,6 +63,16 @@ const App = () => {
           {/* Catch all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+      </ErrorBoundary>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <RouteProvider>
+        <AppLayout />
       </RouteProvider>
     </AuthProvider>
   );

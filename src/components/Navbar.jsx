@@ -9,7 +9,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
-        <Link className="navbar-brand fw-semibold" to="/">Fleet Manager</Link>
+        <Link className="navbar-brand fw-semibold" to="/">
+          Fleet Manager
+        </Link>
 
         <div className="collapse navbar-collapse show">
           <ul className="navbar-nav me-auto">
@@ -17,31 +19,31 @@ const Navbar = () => {
               <>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link ${location.pathname.startsWith('/routes') ? 'active' : ''}`}
-                    to="/routes"
-                  >
-                    Route Management
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
-                    to="/"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={`nav-link ${location.pathname.startsWith('/dashboard') ? 'active' : ''}`}
+                    className={`nav-link ${
+                      location.pathname.startsWith("/dashboard") ? "active" : ""
+                    }`}
                     to="/dashboard"
                   >
                     Dashboard
                   </Link>
                 </li>
+
                 <li className="nav-item">
                   <Link
-                    className={`nav-link ${location.pathname.startsWith('/add-route') ? 'active' : ''}`}
+                    className={`nav-link ${
+                      location.pathname.startsWith("/routes") ? "active" : ""
+                    }`}
+                    to="/routes"
+                  >
+                    Route Management
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname.startsWith("/add-route") ? "active" : ""
+                    }`}
                     to="/add-route"
                   >
                     Add Route
@@ -54,7 +56,12 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             {user && (
               <li className="nav-item">
-                <button className="btn btn-outline-light btn-sm" onClick={logout}>Logout</button>
+                <button
+                  className="btn btn-outline-light btn-sm"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
               </li>
             )}
           </ul>

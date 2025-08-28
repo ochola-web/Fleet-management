@@ -1,133 +1,151 @@
-import React, { useEffect, useState } from "react";
-import { useRoutes } from "../context/RouteContext.jsx";
-
-const emptyForm = { id: null, name: "", start: "", end: "", distance: "", description: "" };
+import React, { useState } from "react";
+import { useRouteContext } from "../context/RouteContext";
 
 const RouteManagement = () => {
-  const { routes, addRoute, updateRoute, deleteRoute } = useRoutes();
-  const [form, setForm] = useState(emptyForm);
-  const [editId, setEditId] = useState(null);
-  const [successMsg, setSuccessMsg] = useState("");
-
-  useEffect(() => {
-    if (editId) {
-      const r = routes.find(x => x.id === editId);
-      if (r) setForm({ ...r });
-    }
-  }, [editId, routes]);
+  const { routes, addRoute, updateRoute, deleteRoute } = useRouteContext();
+  const [form, setForm] = useState({
+    name: "",
+    origin: "",
+    destination: "",
+    distance: "",
+    description: "",
+  });
+  const [editingId, setEditingId] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, start, end, distance } = form;
-    if (!name || !start || !end || !distance) {
-      alert("Please fill in all required fields."); // simple validation feedback
-      return;
-    }
 
-    if (editId) {
-      updateRoute(editId, {
-        ...form,
-        distance: Number(form.distance),
-      });
-      setSuccessMsg("Route updated successfully!");
+    if (editingId) {
+      // ✅ Update existing
+      updateRoute(editingId, form);
+      setEditingId(null);
     } else {
-      addRoute({
-        ...form,
-        distance: Number(form.distance),
-      });
-      setSuccessMsg("Route added successfully!");
+      // ✅ Add new
+      addRoute(form);
     }
 
-    setForm(emptyForm);
-    setEditId(null);
-
-    setTimeout(() => setSuccessMsg(""), 3000); // message disappears after 3s
+    // ✅ Reset form after add/update
+    setForm({
+      name: "",
+      origin: "",
+      destination: "",
+      distance: "",
+      description: "",
+    });
   };
 
-  const handleEdit = (id) => setEditId(id);
-  const handleCancel = () => { setEditId(null); setForm(emptyForm); };
+  const handleEdit = (id) => {
+    const routeToEdit = routes.find((r) => r.id === id);
+    if (routeToEdit) {
+      setForm(routeToEdit);
+      setEditingId(id);
+    }
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this route?")) {
+      deleteRoute(id); // ✅ Calls context to remove route
+    }
+  };
 
   return (
-    <div className="container py-4">
-      <h2 className="mb-4">Route Management</h2>
+    <div className="page-container">
+      <h2>Route Management</h2>
+      <form onSubmit={handleSubmit} className="route-form">
+        <input
+          type="text"
+          name="name"
+          placeholder="Route Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="origin"
+          placeholder="Origin"
+          value={form.origin}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="destination"
+          placeholder="Destination"
+          value={form.destination}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="number"
+          name="distance"
+          placeholder="Distance (km)"
+          value={form.distance}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Short Description"
+          value={form.description}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">
+          {editingId ? "Update Route" : "Add Route"}
+        </button>
+      </form>
 
-      {successMsg && <div className="alert alert-success">{successMsg}</div>}
-
-      {/* Form */}
-      <div className="card p-3 shadow-sm mb-4" style={{maxWidth: 720}}>
-        <h5 className="mb-3">{editId ? "Edit Route" : "Add New Route"}</h5>
-        <form onSubmit={handleSubmit} className="row g-3">
-          <div className="col-md-6">
-            <label className="form-label">Route Name*</label>
-            <input name="name" className="form-control" value={form.name} onChange={handleChange} placeholder="e.g. A104 Express" required />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Distance (km)*</label>
-            <input name="distance" type="number" min="0" className="form-control" value={form.distance} onChange={handleChange} placeholder="e.g. 488" required />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Origin*</label>
-            <input name="start" className="form-control" value={form.start} onChange={handleChange} placeholder="e.g. Nairobi" required />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Destination*</label>
-            <input name="end" className="form-control" value={form.end} onChange={handleChange} placeholder="e.g. Mombasa" required />
-          </div>
-          <div className="col-12">
-            <label className="form-label">Short Description / Purpose</label>
-            <textarea name="description" className="form-control" rows="2" value={form.description} onChange={handleChange} placeholder="e.g. Coastal cargo delivery corridor" />
-          </div>
-          <div className="col-12 d-flex gap-2">
-            <button className="btn btn-success">{editId ? "Update Route" : "Add Route"}</button>
-            {editId && <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancel</button>}
-          </div>
-        </form>
-      </div>
-
-      {/* Table */}
-      <div className="card p-3 shadow-sm">
-        <h5 className="mb-3">Available Routes</h5>
-        {routes.length === 0 ? (
-          <div className="text-muted">No routes yet.</div>
-        ) : (
-          <div className="table-responsive">
-            <table className="table table-striped table-hover align-middle">
-              <thead className="table-dark">
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Origin</th>
-                  <th>Destination</th>
-                  <th>Distance (km)</th>
-                  <th>Description</th>
-                  <th style={{width: 150}}>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {routes.map((r, i) => (
-                  <tr key={r.id}>
-                    <td>{i + 1}</td>
-                    <td>{r.name}</td>
-                    <td>{r.origin}</td>
-                    <td>{r.destination}</td>
-                    <td>{r.distance}</td>
-                    <td className="text-truncate" style={{maxWidth: 260}} title={r.description}>{r.description}</td>
-                    <td>
-                      <button className="btn btn-sm btn-primary me-2" onClick={() => handleEdit(r.id)}>Edit</button>
-                      <button className="btn btn-sm btn-danger" onClick={() => deleteRoute(r.id)}>Delete</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      <h3>Available Routes</h3>
+      <table className="route-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Distance</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {routes.length > 0 ? (
+            routes.map((route) => (
+              <tr key={route.id}>
+                <td>{route.name}</td>
+                <td>{route.origin}</td>
+                <td>{route.destination}</td>
+                <td>{route.distance} km</td>
+                <td>{route.description}</td>
+                <td>
+                  <button
+                    className="btn-edit"
+                    onClick={() => handleEdit(route.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDelete(route.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" style={{ textAlign: "center" }}>
+                No routes available
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

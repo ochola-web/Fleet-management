@@ -10,14 +10,28 @@ const RouteCard = ({ route, onDelete, onEdit }) => {
     <div className="col-md-4 col-sm-6 mb-4">
       <div className="card shadow-sm route-card">
         <div className="card-body">
-          <h5 className="card-title">
-            <FaRoute className="me-2 text-primary" />
-            {route.origin} → {route.destination}
+          {/* Route Name */}
+          <h5 className="card-title text-primary fw-bold">
+            <FaRoute className="me-2" />
+            {route.routeName}
           </h5>
-          <p className="card-text">
+
+          {/* Route Details */}
+          <p className="card-text mb-1">
+            <strong>From:</strong> {route.origin}
+          </p>
+          <p className="card-text mb-1">
+            <strong>To:</strong> {route.destination}
+          </p>
+          <p className="card-text mb-1">
             <strong>Distance:</strong> {route.distance} km
           </p>
-          <div className="d-flex justify-content-between">
+          <p className="card-text text-muted">
+            {route.shortDescription}
+          </p>
+
+          {/* Action Buttons */}
+          <div className="d-flex justify-content-between mt-3">
             <button
               className="btn btn-outline-primary btn-sm"
               onClick={() => onEdit(route.id)}
@@ -26,7 +40,11 @@ const RouteCard = ({ route, onDelete, onEdit }) => {
             </button>
             <button
               className="btn btn-outline-danger btn-sm"
-              onClick={() => onDelete(route.id)}
+              onClick={() => {
+                if (window.confirm("Are you sure you want to delete this route?")) {
+                  onDelete(route.id);
+                }
+              }}
             >
               <Trash2 size={16} className="me-1" /> Delete
             </button>

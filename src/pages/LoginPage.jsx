@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-// import "./LoginPage.css"; // Custom CSS
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -72,10 +71,20 @@ const LoginPage = () => {
           </div>
 
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <Link to="/forgot-password" className="small text-decoration-none">Forgot Password?</Link>
+            <Link to="/forgot-password" className="small text-decoration-none">
+              Forgot Password?
+            </Link>
           </div>
 
           <button type="submit" className="btn btn-primary w-100">Login</button>
+
+          {/* ✅ Signup link */}
+          <div className="text-center mt-3">
+            <span className="text-muted">Don’t have an account? </span>
+            <Link to="/signup" className="text-primary text-decoration-none">
+              Sign Up
+            </Link>
+          </div>
         </form>
       </div>
     </div>

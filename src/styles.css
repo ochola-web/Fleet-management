@@ -1,197 +1,278 @@
-/* --------------------- General Body --------------------- */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f6fa;
+/* ==========================
+   Global Theme & Typography
+   ========================== */
+:root {
+  --primary-color: #0066cc;
+  --primary-dark: #004c99;
+  --secondary-color: #f8f9fa;
+  --accent-color: #ff9800;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --text-color: #333;
+  --muted-color: #6c757d;
+  --bg-color: #f5f6fa;
+  --card-bg: #fff;
+  --border-radius: 10px;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
   margin: 0;
   padding: 0;
-  color: #333;
+  box-sizing: border-box;
 }
 
-/* --------------------- Navbar --------------------- */
-.navbar {
-  padding: 0.8rem 1rem;
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff !important;
-}
-
-.navbar-nav .nav-link {
-  font-weight: 500;
-  margin-right: 10px;
-  color: #ddd !important;
-  transition: color 0.3s;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: #0d6efd !important;
-  font-weight: 600;
-}
-
-/* --------------------- Add Route Form --------------------- */
-.add-route-container {
-  max-width: 650px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-.add-route-container h2 {
-  font-weight: 700;
-  margin-bottom: 25px;
-  color: #0d6efd;
-  text-align: center;
-}
-
-.add-route-container label {
-  font-weight: 600;
-  color: #333;
-}
-
-.add-route-container input,
-.add-route-container select {
-  border-radius: 8px;
-  padding: 10px 12px;
-  border: 1px solid #ced4da;
-  width: 100%;
-  margin-top: 5px;
-}
-
-.add-route-container input:focus,
-.add-route-container select:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-.add-route-container button {
-  background-color: #0d6efd;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 12px 15px;
-  width: 100%;
-  margin-top: 15px;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.add-route-container button:hover {
-  background-color: #0b5ed7;
-  box-shadow: 0 4px 12px rgba(11, 94, 215, 0.3);
-}
-
-/* --------------------- Alerts --------------------- */
-.alert {
-  border-radius: 8px;
-  font-weight: 500;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-}
-
-/* --------------------- Route Management Cards --------------------- */
-.route-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.card {
-  background-color: #fff;
+/* ==========================
+   Layout & Containers
+   ========================== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card h5 {
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #0d6efd;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
 }
 
-.card p {
-  margin: 3px 0;
+.col {
+  flex: 1;
+  padding: 10px;
+}
+
+/* ==========================
+   Navbar
+   ========================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-color);
+  padding: 15px 30px;
+  color: #fff;
+  box-shadow: var(--shadow);
+  font-weight: bold;
+  
+}
+
+.navbar a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--accent-color);
+}
+
+/* ==========================
+   Cards & Tables
+   ========================== */
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
 }
 
-/* --------------------- Dashboard --------------------- */
-.dashboard-container {
-  padding: 30px;
-}
-
-.dashboard-container h2 {
-  font-weight: 700;
-  color: #0d6efd;
-}
-
-/* --------------------- Tables (if any) --------------------- */
-.table {
+.routes-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
-.table th,
-.table td {
-  border: 1px solid #dee2e6;
+.routes-table th,
+.routes-table td {
   padding: 12px;
+  border: 1px solid #ddd;
   text-align: left;
 }
 
-.table th {
-  background-color: #0d6efd;
+.routes-table th {
+  background: var(--primary-color);
   color: #fff;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f8f9fa;
+.routes-table tr:hover {
+  background: #f1f1f1;
 }
 
-/* --------------------- Responsive --------------------- */
-@media (max-width: 1024px) {
-  .add-route-container {
-    margin: 20px;
-    padding: 20px;
+/* ==========================
+   Buttons
+   ========================== */
+button,
+.btn {
+  background: var(--primary-color);
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--primary-dark);
+}
+
+.btn-success {
+  background: var(--success-color);
+}
+
+.btn-danger {
+  background: var(--danger-color);
+}
+
+.btn-warning {
+  background: var(--accent-color);
+}
+
+/* ==========================
+   Forms
+   ========================== */
+form {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text-color);
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 4px var(--primary-color);
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: var(--success-color);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* ==========================
+   Interactivity
+   ========================== */
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+a.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+/* Feedback messages */
+.alert {
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: var(--success-color);
+}
+
+.alert-danger {
+  background: #f8d7da;
+  color: var(--danger-color);
+}
+
+/* ==========================
+   Icons
+   ========================== */
+.icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ==========================
+   Responsiveness
+   ========================== */
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
   }
-  .navbar-brand {
-    font-size: 1.3rem;
+
+  .row {
+    flex-direction: column;
   }
 }
 
 @media (max-width: 768px) {
-  .navbar-nav .nav-link {
-    margin-right: 0;
-    margin-bottom: 8px;
+  .routes-table,
+  .routes-table thead,
+  .routes-table tbody,
+  .routes-table th,
+  .routes-table td,
+  .routes-table tr {
+    display: block;
+    width: 100%;
   }
-  .add-route-container {
-    margin: 15px;
-    padding: 15px;
-  }
-  .route-cards {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-}
 
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
+  .routes-table tr {
+    margin-bottom: 15px;
   }
-  .add-route-container h2 {
-    font-size: 1.4rem;
+
+  .routes-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
   }
-  .card h5 {
-    font-size: 1.1rem;
+
+  .routes-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    font-weight: bold;
+    color: var(--muted-color);
   }
 }

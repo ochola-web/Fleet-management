@@ -1,42 +1,49 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+// src/context/RouteContext.jsx
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-export const RouteContext = createContext();
+// Create context
+const RouteContext = createContext();
 
+// Provider
 export const RouteProvider = ({ children }) => {
   const [routes, setRoutes] = useState(() => {
     const stored = localStorage.getItem("routes");
     return stored ? JSON.parse(stored) : [];
   });
 
+  // Keep in sync with localStorage
   useEffect(() => {
     localStorage.setItem("routes", JSON.stringify(routes));
   }, [routes]);
 
-  // ✅ Add new route
+  // Add
   const addRoute = (route) => {
-    setRoutes((prev) => [...prev, { ...route, id: Date.now() }]);
+    setRoutes((prev) => [
+      ...prev,
+      { ...route, id: Date.now().toString() },
+    ]);
   };
 
-  // ✅ Edit existing route
+  // Update
   const updateRoute = (id, updatedRoute) => {
     setRoutes((prev) =>
       prev.map((r) => (r.id === id ? { ...r, ...updatedRoute } : r))
     );
   };
 
-  // ✅ Delete route
+  // Delete
   const deleteRoute = (id) => {
     setRoutes((prev) => prev.filter((r) => r.id !== id));
   };
 
   return (
     <RouteContext.Provider
-      value={{ routes, addRoute, updateRoute, deleteRoute, setRoutes }}
+      value={{ routes, addRoute, updateRoute, deleteRoute }}
     >
       {children}
     </RouteContext.Provider>
   );
 };
 
-// ✅ Custom hook
-export const useRoutes = () => useContext(RouteContext);
+// Custom hook
+export const useRouteContext = () => useContext(RouteContext);

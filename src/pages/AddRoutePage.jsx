@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useRoutes } from "../context/RouteContext.jsx";
+import { useRouteContext } from "../context/RouteContext.jsx"; // ✅ FIXED import
 
 const AddRoutePage = () => {
-  const { addRoute } = useRoutes();
+  const { addRoute } = useRouteContext(); // ✅ useRouteContext instead of useRoutes
 
   const [form, setForm] = useState({
     name: "",
     origin: "",
     destination: "",
     distance: "",
-    description: ""
+    description: "",
   });
 
   const [error, setError] = useState("");
@@ -37,11 +37,11 @@ const AddRoutePage = () => {
       origin: "",
       destination: "",
       distance: "",
-      description: ""
+      description: "",
     });
 
     setError("");
-    setSuccess("Route added successfully!"); // ✅ Show success
+    setSuccess("✅ Route added successfully!");
   };
 
   return (
@@ -61,6 +61,7 @@ const AddRoutePage = () => {
             onChange={handleChange}
             className="form-control"
             placeholder="e.g., City Center to Airport"
+            required
           />
         </div>
 
@@ -73,6 +74,7 @@ const AddRoutePage = () => {
             onChange={handleChange}
             className="form-control"
             placeholder="e.g., Downtown"
+            required
           />
         </div>
 
@@ -85,6 +87,7 @@ const AddRoutePage = () => {
             onChange={handleChange}
             className="form-control"
             placeholder="e.g., Airport Terminal 1"
+            required
           />
         </div>
 
@@ -97,6 +100,7 @@ const AddRoutePage = () => {
             onChange={handleChange}
             className="form-control"
             placeholder="e.g., 12"
+            required
           />
         </div>
 
