@@ -96,7 +96,12 @@ const RouteManagement = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">
+
+        {/* ✅ Custom button classes */}
+        <button
+          type="submit"
+          className={editingId ? "btn-update" : "btn-add"}
+        >
           {editingId ? "Update Route" : "Add Route"}
         </button>
       </form>

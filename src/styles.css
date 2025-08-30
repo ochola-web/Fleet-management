@@ -9,57 +9,95 @@ body {
   padding: 0;
 }
 
+/* =====================
+   Theme Overrides
+===================== */
+:root {
+  --bs-primary: #28a745; /* green theme */
+  --bs-primary-rgb: 40, 167, 69;
+}
+
 /* Links */
 a {
   text-decoration: none;
   color: inherit;
 }
 a:hover {
-  color: #0d6efd;
+  color: purple; /* hover purple */
 }
 
 /* =====================
    Navbar
 ===================== */
+.navbar {
+  background-color: #28a745; /* Green theme */
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Brand (Fleet Manager) */
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff !important;
+  margin-bottom: 0.5rem;
 }
 
+/* Nav links container */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+/* Links */
 .navbar-nav .nav-link {
   font-weight: 500;
-  color: #ddd !important;
-  margin-left: 0.5rem;
+  color: #f1f1f1 !important;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: purple !important;
 }
 
 .navbar-nav .nav-link.active {
-  color: #0d6efd !important;
+  color: purple !important;
+  font-weight: 600;
+  border-bottom: 2px  purple; /* ✅ fixed underline */
+  padding-bottom: 0.25rem;
 }
 
-.navbar-nav .btn {
-  color: #fff;
-  border-color: #dc3545;
+/* Logout button styling */
+.navbar .btn-logout {
+  margin-left: 0;
+  background-color: #dc3545; /* Red base */
+  color: #fff !important;
+  border: 1px solid #dc3545 !important;
 }
 
-.navbar-nav .btn:hover {
-  background-color: #dc3545;
-  color: #fff;
-  border-color: #dc3545;
+.navbar .btn-logout:hover,
+.navbar .btn-logout:focus {
+  background-color: #b02a37 !important; /* Darker red on hover */
+  border-color: #a52834 !important;
+  color: #fff !important;
 }
 
 /* =====================
    Buttons
 ===================== */
 .btn-primary {
-  background-color: #0d6efd;
-  border: none;
+  background-color: var(--bs-primary) !important;
+  border: none !important;
   border-radius: 5px;
   transition: 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #0b5ed7;
+  background-color: #218838 !important;
+  
 }
 
 .btn-outline-danger {
@@ -72,6 +110,38 @@ a:hover {
   color: #fff;
 }
 
+/* Add Button */
+.btn-add {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-add:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+/* Update Button */
+.btn-update {
+  background-color: #218838;
+  color: #fff;
+  border: 1px solid #218838;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-update:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
 /* =====================
    Forms
 ===================== */
@@ -82,17 +152,24 @@ input, textarea, select {
   width: 100%;
   font-size: 0.95rem;
   transition: 0.3s;
+  
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: #0d6efd;
-  box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 5px rgba(var(--bs-primary-rgb), 0.3) !important;
+  
+}
+textarea {
+  resize: vertical; /* ✅ only up/down resize */
+  min-height: 100px;
 }
 
 .form-label {
   font-weight: 600;
   margin-bottom: 0.25rem;
+  
 }
 
 /* =====================
@@ -131,7 +208,7 @@ th, td {
 }
 
 th {
-  background-color: #0d6efd;
+  background-color: #28a745;
   color: #fff;
   font-weight: 600;
 }
@@ -151,14 +228,15 @@ tr:hover {
   font-size: 0.85rem;
   border: none;
   cursor: pointer;
+  gap:space;
 }
 
 .btn-edit {
-  background-color: #0d6efd;
+  background-color: #28a745;
   color: #fff;
 }
 .btn-edit:hover {
-  background-color: #0b5ed7;
+  background-color: #218838;
 }
 
 .btn-delete {
@@ -194,7 +272,9 @@ tr:hover {
 ===================== */
 @media (max-width: 768px) {
   .navbar-nav {
-    text-align: center;
+    flex-direction: column;
+    align-items: flex-start; /* nav links below brand, left aligned */
+    gap: 0.5rem;
   }
 
   table, .route-card, .login-card {

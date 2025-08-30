@@ -53,18 +53,19 @@ const Navbar = () => {
             )}
           </ul>
 
-          <ul className="navbar-nav ms-auto">
+           <ul className="navbar-nav ms-auto">
             {user && (
-              <li className="nav-item">
-                <button
-                  className="btn btn-outline-light btn-sm"
-                  onClick={logout}
-                >
-                  Logout
-                </button>
-              </li>
-            )}
-          </ul>
+            <li className="nav-item">
+               <button
+            className="btn btn-logout btn-sm"
+           onClick={logout}
+          >
+               Logout
+              </button>
+           </li>
+          )}
+        </ul>
+
         </div>
       </div>
     </nav>
