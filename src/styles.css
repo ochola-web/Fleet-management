@@ -7,8 +7,6 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
-  width: 100%;
-  overflow-x: hidden; /* prevents unwanted horizontal scroll */
 }
 
 /* =====================
@@ -32,10 +30,7 @@ a:hover {
    Navbar
 ===================== */
 .navbar {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100vw;                    /* full viewport width */
+  width: 100%;                     /* full width */
   background-color: #28a745;       /* Green theme */
   padding: 0.75rem 1.5rem;
   display: flex;
@@ -43,7 +38,6 @@ a:hover {
   align-items: center;
   box-sizing: border-box;
   flex-wrap: wrap;                 /* allows wrapping on small screens */
-  z-index: 1000;                   /* keeps navbar above other content */
 }
 
 /* Brand (Fleet Manager) */
@@ -76,7 +70,7 @@ a:hover {
 .navbar-nav .nav-link.active {
   color: purple !important;
   font-weight: 600;
-  border-bottom: 2px purple;
+  border-bottom: 2px  purple;
   padding-bottom: 0.25rem;
 }
 
@@ -86,6 +80,9 @@ a:hover {
   background-color: #dc3545;
   color: #fff !important;
   border: 1px solid #dc3545 !important;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  white-space: nowrap; /* prevent breaking into two lines */
 }
 
 .navbar .btn-logout:hover,
@@ -288,10 +285,11 @@ tr:hover {
     width: 100%;
   }
 
+  /* ✅ keep logout button inline size on mobile */
   .navbar .btn-logout {
-    width: 100%;
     margin-left: 0;
     margin-top: 0.5rem;
+    width: auto;  /* override full width */
   }
 
   table, .route-card, .login-card {
