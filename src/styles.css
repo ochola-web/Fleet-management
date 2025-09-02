@@ -30,14 +30,15 @@ a:hover {
    Navbar
 ===================== */
 .navbar {
-  width: 100%;                     /* full width */
-  background-color: #28a745;       /* Green theme */
+  width: 100%;
+  background-color: #28a745;  /* Green theme */
   padding: 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;  /* brand left, links right */
   align-items: center;
   box-sizing: border-box;
-  flex-wrap: wrap;                 /* allows wrapping on small screens */
+  flex-direction: row;             /* ✅ force row by default */
+  flex-wrap: nowrap;               /* ✅ prevent block layout */
 }
 
 /* Brand (Fleet Manager) */
@@ -51,9 +52,10 @@ a:hover {
 /* Nav links container */
 .navbar-nav {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;             /* ✅ row on desktop/tablet */
   gap: 1.5rem;
-  flex-wrap: wrap;
+  align-items: justify;
+  flex-wrap: nowrap;               /* ✅ prevent wrapping */
 }
 
 /* Links */
@@ -82,7 +84,8 @@ a:hover {
   border: 1px solid #dc3545 !important;
   padding: 0.4rem 1rem;
   border-radius: 5px;
-  white-space: nowrap; /* prevent breaking into two lines */
+  white-space: nowrap;
+  width: auto;   /* ✅ prevent full width */
 }
 
 .navbar .btn-logout:hover,
@@ -101,7 +104,6 @@ a:hover {
   border-radius: 5px;
   transition: 0.3s;
 }
-
 .btn-primary:hover {
   background-color: #218838 !important;
 }
@@ -110,7 +112,6 @@ a:hover {
   color: #dc3545;
   border-color: #dc3545;
 }
-
 .btn-outline-danger:hover {
   background-color: #dc3545;
   color: #fff;
@@ -159,18 +160,15 @@ input, textarea, select {
   font-size: 0.95rem;
   transition: 0.3s;
 }
-
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--bs-primary) !important;
   box-shadow: 0 0 5px rgba(var(--bs-primary-rgb), 0.3) !important;
 }
-
 textarea {
-  resize: vertical; /* ✅ only up/down resize */
+  resize: vertical;
   min-height: 100px;
 }
-
 .form-label {
   font-weight: 600;
   margin-bottom: 0.25rem;
@@ -205,26 +203,21 @@ table {
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 th, td {
   padding: 0.75rem 1rem;
   text-align: left;
 }
-
 th {
   background-color: #28a745;
   color: #fff;
   font-weight: 600;
 }
-
 tr:nth-child(even) {
   background-color: #f8f9fa;
 }
-
 tr:hover {
   background-color: #e9ecef;
 }
-
 .btn-edit, .btn-delete {
   padding: 0.25rem 0.5rem;
   margin-right: 0.25rem;
@@ -233,7 +226,6 @@ tr:hover {
   border: none;
   cursor: pointer;
 }
-
 .btn-edit {
   background-color: #28a745;
   color: #fff;
@@ -241,7 +233,6 @@ tr:hover {
 .btn-edit:hover {
   background-color: #218838;
 }
-
 .btn-delete {
   background-color: #dc3545;
   color: #fff;
@@ -260,11 +251,9 @@ tr:hover {
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   background-color: #fff;
 }
-
 .login-page {
   background-color: #f4f6f9;
 }
-
 .alert {
   border-radius: 5px;
   padding: 0.5rem 1rem;
@@ -275,21 +264,18 @@ tr:hover {
 ===================== */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
+    flex-direction: column;     /* ✅ stack only on mobile */
     align-items: flex-start;
   }
-
   .navbar-nav {
     flex-direction: column;
     gap: 0.75rem;
     width: 100%;
   }
-
-  /* ✅ keep logout button inline size on mobile */
   .navbar .btn-logout {
     margin-left: 0;
     margin-top: 0.5rem;
-    width: auto;  /* override full width */
+    width: auto; /* ✅ keep button inline */
   }
 
   table, .route-card, .login-card {
